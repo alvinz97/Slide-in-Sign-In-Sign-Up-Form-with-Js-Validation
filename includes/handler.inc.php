@@ -1,5 +1,5 @@
 <?php 
- require 'config.inc.php';
+require 'config.inc.php';
 
 $status = $_REQUEST['status'];
 
@@ -9,34 +9,29 @@ if ($status == 'register') {
     $username = $_REQUEST['username'];
     $email = $_REQUEST['email'];
     $password = $_REQUEST['password'];
-    $re_pass = $_REQUEST['re_pass'];
 
-    if ($password != $re_pass) {
-        echo "pwdMissMatch";
+    $sql = "SELECT id FROM users WHERE username=?;";
+    $stmt = mysqli_stmt_init($db);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        echo 'sqlError';
     } else {
-        $sql = "SELECT id FROM users WHERE username=?;";
-        $stmt = mysqli_stmt_init($db);
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            echo 'sqlError';
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        $resultCheck = mysqli_stmt_num_rows($stmt);
+        if ($resultCheck > 0) {
+            echo 'usernameTaken';
         } else {
-            mysqli_stmt_bind_param($stmt, "s", $username);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            $resultCheck = mysqli_stmt_num_rows($stmt);
-            if ($resultCheck > 0) {
-                echo 'usernameTaken';
+            $date = date('Y-m-d H:i:s');
+            $passHashed = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO users (username, email, password, timeStamp) VALUES('$username', '$email','$passHashed','$date')";
+            
+            if ($db->query($sql)) {
+                session_start();
+                $_SESSION['username'] = $username;
+                echo "OK";
             } else {
-                $date = date('Y-m-d H:i:s');
-                $passHashed = password_hash($password, PASSWORD_DEFAULT);
-                $sql = "INSERT INTO users (username, email, password, timeStamp) VALUES('$username', '$email','$passHashed','$date')";
-                
-                if ($db->query($sql)) {
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    echo "OK";
-                } else {
-                    echo "Error";
-                }
+                echo "Error";
             }
         }
     }
