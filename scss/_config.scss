@@ -1,0 +1,172 @@
+/* =================== Color Pallet =================== */
+
+$primary-color: #009cf7;
+$secondary-color: #cacaca;
+$success-color: #21c400;
+$warning-color: #ced100;
+$danger-color: #df0000;
+$white-color: #ffffff;
+$dark-color: #000000;
+
+$thumb-color: #525965;
+
+
+$primary-color-bg: #009cf7;
+$secondary-color-bg: #cacaca;
+$success-color-bg: #21c400;
+$warning-color-bg: #ced100;
+$danger-color-bg: #df0000;
+$white-color-bg: #ffffff;
+$dark-color-bg: #000000;
+
+$sidebar-bg: #000000;
+$sidebar-submenu-bg: #303030;
+
+
+// Set text color based on background color
+
+@function set-text-color($color) {
+    @if (lightness($color) > 50) {
+        @return $dark-color;
+    }
+
+    @else {
+        @return $white-color;
+    }
+}
+
+// Set background & text color
+
+@mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: 0;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: $white-color-bg;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    /* Fix for webkit rendering */
+    -webkit-text-size-adjust: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: -20px 50px;
+}
+
+
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    background: $white-color-bg;
+    display: flex;
+
+    .loader {
+        margin: auto;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: $dark-color-bg;
+            border-radius: 50%;
+            opacity: 0;
+            animation: spin 1.5s linear infinite 0s;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: $dark-color-bg;
+            border-radius: 50%;
+            opacity: 0;
+            animation: spin 1.5s linear infinite 0.5s;
+        }
+    }
+
+}
+
+
+.background {
+    &-dark {
+        @include set-background($dark-color-bg);
+    }
+
+    &-white {
+        @include set-background($white-color-bg);
+    }
+
+    &-danger {
+        @include set-background($danger-color-bg);
+    }
+
+    &-warning {
+        @include set-background($warning-color-bg);
+    }
+
+    &-success {
+        @include set-background($success-color-bg);
+    }
+
+    &-secondary {
+        @include set-background($secondary-color-bg);
+    }
+
+    &-primary {
+        @include set-background($primary-color-bg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    1% {
+        opacity: 0.1;
+        transform: scale(0);
+    }
+
+    99% {
+        opacity: 0;
+        transform: scale(2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
