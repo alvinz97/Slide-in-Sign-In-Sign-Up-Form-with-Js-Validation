@@ -44,11 +44,11 @@ $oneToTwoHundred: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
     }
 
     .mt-#{$space} {
-        margin: #{$space}px;
+        margin-top: #{$space}px;
     }
 
     .mb-#{$space} {
-        margin: #{$space}px;
+        margin-bottom: #{$space}px;
     }
 
     .ml-#{$space} {

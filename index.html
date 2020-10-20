@@ -11,26 +11,39 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <h1>Sign Up</h1>
-            <form action="#" class="from sign-in-form">
+            <form action="includes/handler.inc.php" class="form" id="sign-up-form" method="post">
+                <h1>Sign Up</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="social"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
 
-                <span>or using your email for registration</span>
+                <span class="mb-15">or using your email for registration</span>
 
-                <input type="text" class="userName" placeholder="Name">
-                <input type="text" class="email" placeholder="Email">
-                <input type="password" class="password" placeholder="Password">
+                <span class="errorLogs my-10"></span>
 
-                <button type="submit">Sign Up</button>
+                <div class="form-group">
+                    <input type="text" class="userName" placeholder="Name" id="username" autocomplete="off" data-rule="required" data-msg="Please enter your username">
+                    <p class="validation"></p>
+                </div>
+
+                <div class="form-group mt-10">
+                    <input type="text" class="email" placeholder="Email" id="email" autocomplete="off" data-rule="email" data-msg="Please enter your email">
+                    <p class="validation"></p>
+                </div>
+
+                <div class="form-group mt-10">
+                    <input type="password" class="password" placeholder="Password" id="Password" data-rule="minlen:6" data-msg="Please enter your password">
+                    <p class="validation"></p>
+                </div>
+
+                <button type="submit" class="mt-20">Sign Up</button>
             </form>
         </div>
 
-        <div class="form-container sign-up-container">
-            <form action="#" class="from sign-up-form">
+        <div class="form-container sign-in-container">
+            <form action="includes/handler.inc.php" class="from" id="sign-in-form" method="post">
                 <h1>Sign In</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook"></i></a>
@@ -38,27 +51,38 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
 
-                <span>or use your existing account</span>
+                <span class="mb-15">or use your existing account</span>
+                
+                <span class="errorLogs my-10"></span>
 
-                <input type="text" class="email" placeholder="Email">
-                <input type="password" class="password" placeholder="Password">
+                <div class="form-group">
+                    <input type="text" class="email" placeholder="Email"  id="login_email" data-rule="email" data-msg="Please enter your email">
+                    <p class="validation"></p>
+                </div>
 
-                <button type="submit">Sign In</button>
+                <div class="form-group mt-10">
+                    <input type="password" class="password" placeholder="Password" id="login_password" data-rule="required" data-msg="Please enter your password">
+                <p class="validation"></p>
+                </div>
+                
+                
+                <button type="submit" class="mt-20">Sign In</button>
             </form>
         </div>
 
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back</h1>
-                    <p>To keep connected with us, please login with your personal info</p>
+                    <h1>Hello Friend</h1>
+                    <p>Enter your personal details and start journey with us</p>
 
                     <button class="ghost" id="signIn">Sign In</button>
                 </div>
 
                 <div class="overlay-panel overlay-right">
+
                     <h1>Welcome Back</h1>
-                    <p>Enter your personal details and start journey with us</p>
+                    <p>To keep connected with us, please login with your personal info</p>
 
                     <button class="ghost" id="signUp">Sign Up</button>
                 </div>
@@ -71,5 +95,6 @@
     
     <script src="assets/jquery/jquery-3.5.1.min.js"></script>
     <script src="assets/font-awesome/js/all.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
