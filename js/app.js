@@ -37,7 +37,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == 'sqlError') {
                     $(".errorLogs").addClass("error");
-                    $(".errorLogs").text("SQL Error occure");
+                    $(".errorLogs").text("SQL Error occurs");
                     $('#sign-up-form').find("input").val('')
                 } else if (data == 'usernameTaken') {
                     $("#username").text("username exist, try another");
